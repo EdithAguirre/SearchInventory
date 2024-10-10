@@ -5,6 +5,8 @@ package com.pluralsight;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class SearchInventory {
@@ -12,6 +14,10 @@ public class SearchInventory {
         ArrayList<Product> inventory = getInventory();
         Scanner scanner = new Scanner(System.in);
         System.out.println("We carry the following inventory: ");
+
+        // BONUS #2: Sort the products by name before displaying them.
+        Collections.sort(inventory, Comparator.comparing(Product::getName));
+
         for (int i = 0; i < inventory.size(); i++) {
             Product p = inventory.get(i);
             System.out.printf("id: %d - Product: %s - Price: $%.2f\n",
@@ -25,7 +31,7 @@ public class SearchInventory {
             // Create an array list of products
             ArrayList<Product> inventory = new ArrayList<Product>();
 
-            // Replace the code that loaded the ArrayList with code that reads data
+            // BONUS #1: Replace the code that loaded the ArrayList with code that reads data
             //from a file named inventory.csv. Create a file containing products.
             writeToFile();
             readFromFile(inventory);
@@ -36,7 +42,7 @@ public class SearchInventory {
     public static void writeToFile(){
         try {
             // Create buffered writer to write to inventory file
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src/main/resources/inventory.csv",true));
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src/main/resources/inventory.csv"));
 
             // Write 5 products to the file
             bufferedWriter.write("4567|10' 2x4 (grade B)|9.99\n");
